@@ -5,6 +5,7 @@ using TMPro;
 
 public class Player_Movement : MonoBehaviour
 {
+    [HideInInspector] public static Player_Movement instance; //Static refrence for anyone who wants access
 
     public float moveSpeed = 5f;
     public float shotSpeed = 5f;
@@ -51,6 +52,14 @@ public class Player_Movement : MonoBehaviour
 
     private Vector2 moveDirection;
     public List<int> itemsHeld = new List<int>();
+
+    void Awake() //start is proberly fine aswell, better safe than pooey (Issac)
+    {
+        if (instance == null)
+            instance = this; //this is the instance
+        else
+            Destroy(this); //should never be multiple instances
+    }
 
     void Start()
     {
